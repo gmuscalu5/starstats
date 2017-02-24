@@ -38,17 +38,19 @@ exports.upload = function (req, res) {
       return;
     }
     var workSheetsFromFile = xlsx.parse(req.file.path);
-    Team(req)
-      .findOrCreate({where: {name: workSheetsFromFile[0].data[17][1]}})
-      .then(function (team) {
-        return res.status(200).json(team[0]);
-      })
-      .catch(function (err) {
-        if (err) {
-          console.log(err);
-          return handleError(res, err);
-        }
-      });
+    if (workSheetsFromFile[0].data[17] && workSheetsFromFile[0].data[17][1]) {
+      Team(req)
+        .findOrCreate({where: {name: workSheetsFromFile[0].data[17][1]}})
+        .then(function (team) {
+          return res.status(200).json(team[0]);
+        })
+        .catch(function (err) {
+          if (err) {
+            return handleError(res, err);
+          }
+        });
+    }
+    else res.status(500).send('invalid file');
   });
 };
 

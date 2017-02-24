@@ -11,7 +11,7 @@
           vm.determinateValue = 100;
           showDialog('File ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data.name)
         }, function (err) {
-          showDialog('Error status: ' + err.status)
+          showDialog('Error status: ' + err.status + ' - ' + err.data)
         }, function (evt) {});
       }
     }
