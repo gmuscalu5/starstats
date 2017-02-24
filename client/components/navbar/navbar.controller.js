@@ -1,15 +1,17 @@
-'use strict';
-
-angular.module('statsApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
+(function () {
+  'use strict';
+  NavbarController.$inject = ['$state'];
+  function NavbarController($state) {
+    var vm = this;
+    vm.menu = [{
+      'label': 'Home',
+      'state': 'main'
     }];
+    vm.goTo = goTo;
+    function goTo (state) {
+      $state.go(state);
+    }
+  }
 
-    $scope.isCollapsed = true;
-
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+  angular.module('statsApp').controller('NavbarController', NavbarController);
+})();

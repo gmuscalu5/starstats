@@ -6,7 +6,8 @@ angular.module('statsApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'ngMaterial'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
