@@ -1,15 +1,16 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Upload statistics file:</h1>
-    </div>
-    <form name="form">
-      <span ng-if="file">{{file.name}}</span>
-      <button ngf-select ng-model="file" name="file" ngf-max-size="20MB" ngf-min-height="100">Select</button>
-      <button type="submit" ng-click="submit()">Upload</button>
-    </form>
+<md-content class="md-padding">
+  <div layout="row">
+    <h3>Upload statistics file:</h3>
   </div>
-</div>
+  <div layout="row" layout-align="start center">
+    <md-button class="md-raised" ngf-select ng-model="ctrl.file" name="file" ngf-max-size="20MB"
+               ngf-min-height="100">Browse
+    </md-button>
+    <span ng-if="ctrl.file">{{ctrl.file.name}}</span>
+  </div>
+  <div layout="row">
+    <md-button class="md-primary md-raised" type="submit" ng-click="ctrl.upload(ctrl.file)">Upload</md-button>
+    <md-progress-circular md-mode="determinate" value="{{ctrl.determinateValue}}"></md-progress-circular>
+  </div>
+</md-content>

@@ -35,6 +35,6 @@ exports.upload = function (req, res) {
       return;
     }
     var workSheetsFromFile = xlsx.parse(req.file.path);
-    console.log(workSheetsFromFile[0].data);
+    return res.status(200).json(workSheetsFromFile[0].data);
   });
 };
