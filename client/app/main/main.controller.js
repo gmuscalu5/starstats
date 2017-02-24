@@ -1,23 +1,30 @@
 'use strict';
 
 angular.module('statsApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, Upload) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').then(function(response) {
+    $http.get('/api/teams').then(function(response) {
       $scope.awesomeThings = response.data;
-      debugger;
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
+    $scope.submit = function() {
+      if ($scope.form.file.$valid && $scope.file) {
+        $scope.upload($scope.file);
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.upload = function (file) {
+      Upload.upload({
+        url: 'upload',
+        data: {file: file, 'username': $scope.username}
+      }).then(function (resp) {
+        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      }, function (resp) {
+        console.log('Error status: ' + resp.status);
+      }, function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+      });
     };
   });

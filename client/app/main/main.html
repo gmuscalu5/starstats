@@ -6,8 +6,13 @@
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.title}}</a></li>
+        <li><a href="#">{{thing.name}}</a></li>
       </ul>
     </div>
+    <form name="form">
+      <span ng-if="file">{{file.name}}</span>
+      <button ngf-select ng-model="file" name="file" ngf-max-size="20MB" ngf-min-height="100">Select</button>
+      <button type="submit" ng-click="submit()">Upload</button>
+    </form>
   </div>
 </div>
