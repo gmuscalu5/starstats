@@ -4,11 +4,11 @@ angular.module('statsApp')
   .controller('MainCtrl', function ($scope, $http, Upload) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/teams').then(function(response) {
+    $http.get('/api/teams').then(function (response) {
       $scope.awesomeThings = response.data;
     });
 
-    $scope.submit = function() {
+    $scope.submit = function () {
       if ($scope.form.file.$valid && $scope.file) {
         $scope.upload($scope.file);
       }
@@ -16,7 +16,7 @@ angular.module('statsApp')
 
     $scope.upload = function (file) {
       Upload.upload({
-        url: 'upload',
+        url: 'api/upload',
         data: {file: file, 'username': $scope.username}
       }).then(function (resp) {
         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
