@@ -2,7 +2,7 @@
   <md-content>
     <md-nav-bar md-selected-nav-item="currentNavItem"
       nav-bar-aria-label="navigation links">
-      <md-nav-item ng-repeat="item in ctrl.menu" md-nav-click="goTo(item.state)">
+      <md-nav-item ng-repeat="item in ctrl.menu" md-nav-click="ctrl.goTo(item.state)">
         {{item.label}}
       </md-nav-item>
     </md-nav-bar>

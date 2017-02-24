@@ -4,8 +4,11 @@
   function NavbarController($state) {
     var vm = this;
     vm.menu = [{
-      'label': 'Home',
+      'label': 'Upload',
       'state': 'main'
+    },{
+      'label': 'Teams',
+      'state': 'teams'
     }];
     vm.goTo = goTo;
     function goTo (state) {
