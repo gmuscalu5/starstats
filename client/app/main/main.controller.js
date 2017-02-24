@@ -9,7 +9,7 @@
       if (file) {
         UploadService.uploadFile(file).then(function (resp) {
           vm.determinateValue = 100;
-          showDialog('File ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data)
+          showDialog('File ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data.name)
         }, function (err) {
           showDialog('Error status: ' + err.status)
         }, function (evt) {});

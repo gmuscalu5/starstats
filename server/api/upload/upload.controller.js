@@ -2,6 +2,9 @@
 
 var multer = require('multer');
 var xlsx = require('node-xlsx');
+function Team(req) {
+  return req.app.get('models').Team;
+}
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -35,6 +38,20 @@ exports.upload = function (req, res) {
       return;
     }
     var workSheetsFromFile = xlsx.parse(req.file.path);
-    return res.status(200).json(workSheetsFromFile[0].data);
+    Team(req)
+      .findOrCreate({where: {name: workSheetsFromFile[0].data[17][1]}})
+      .then(function (team) {
+        return res.status(200).json(team[0]);
+      })
+      .catch(function (err) {
+        if (err) {
+          console.log(err);
+          return handleError(res, err);
+        }
+      });
   });
 };
+
+function handleError(res, err) {
+  return res.status(500).send(err);
+}
